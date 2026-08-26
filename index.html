@@ -34,10 +34,13 @@ body {
 }
 
 
-/* POSTALES */
+/* =========================
+   POSTALES
+   ========================= */
 
 .postal {
     position: relative;
+
     min-height: 100vh;
 
     display: flex;
@@ -53,7 +56,9 @@ body {
 }
 
 
-/* IMAGEN COMPLETA */
+/* =========================
+   IMAGEN COMPLETA
+   ========================= */
 
 .postal img {
     position: absolute;
@@ -69,7 +74,9 @@ body {
 }
 
 
-/* OSCURIDAD SUAVE */
+/* =========================
+   OSCURIDAD SUAVE
+   ========================= */
 
 .postal::before {
     content: "";
@@ -90,7 +97,9 @@ body {
 }
 
 
-/* TEXTURA ANTIGUA */
+/* =========================
+   TEXTURA ANTIGUA
+   ========================= */
 
 .postal::after {
     content: "";
@@ -110,7 +119,9 @@ body {
 }
 
 
-/* BORDE */
+/* =========================
+   BORDE DE POSTAL
+   ========================= */
 
 .frame {
     position: absolute;
@@ -126,7 +137,9 @@ body {
 }
 
 
-/* TEXTO */
+/* =========================
+   TEXTO
+   ========================= */
 
 .content {
     position: relative;
@@ -140,6 +153,10 @@ body {
     padding: 50px 25px;
 }
 
+
+/* =========================
+   LETRA
+   ========================= */
 
 .text {
     color: #F4EFE5;
@@ -179,7 +196,9 @@ body {
 }
 
 
-/* INDICADORES */
+/* =========================
+   INDICADORES
+   ========================= */
 
 .scroll {
     position: absolute;
@@ -229,7 +248,9 @@ body {
 }
 
 
-/* MÓVIL */
+/* =========================
+   MÓVIL
+   ========================= */
 
 @media (max-width: 600px) {
 
@@ -268,7 +289,9 @@ body {
 <body>
 
 
-<!-- PRIMERA POSTAL -->
+<!-- =========================
+     PRIMERA POSTAL
+     ========================= -->
 
 <section class="postal">
 
@@ -280,7 +303,7 @@ body {
     <div class="frame"></div>
 
 
-    <!-- FLECHA HACIA ABAJO -->
+    <!-- ARRIBA -->
 
     <div class="scroll scroll-top">
 
@@ -302,6 +325,8 @@ body {
     </div>
 
 
+    <!-- ABAJO -->
+
     <div class="scroll scroll-bottom">
 
         <span>↓</span>
@@ -313,12 +338,14 @@ body {
 
 
 
-<!-- SEGUNDA POSTAL -->
+<!-- =========================
+     SEGUNDA POSTAL
+     ========================= -->
 
 <section class="postal">
 
     <img
-        src="5f56d248c82c8f7e16d9265436a25e45.jpg"
+        src="20260826_035237.jpg"
         alt=""
     >
 
@@ -339,6 +366,8 @@ body {
     </div>
 
 
+    <!-- ABAJO -->
+
     <div class="scroll scroll-bottom">
 
         <span>↓</span>
@@ -350,12 +379,14 @@ body {
 
 
 
-<!-- TERCEIRA POSTAL -->
+<!-- =========================
+     TERCEIRA POSTAL
+     ========================= -->
 
 <section class="postal">
 
     <img
-        src="20260826_035237.jpg"
+        src="5f56d248c82c8f7e16d9265436a25e45.jpg"
         alt=""
     >
 
@@ -380,4 +411,4 @@ body {
 
 </body>
 
-    </html>
+            </html>
