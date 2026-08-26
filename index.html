@@ -1,1 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Orbitando Você</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+body {
+    font-family: "Cormorant Garamond", serif;
+}
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+/* =========================
+   IMÁGENES
+   ========================= */
+
+.slide {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+
+    transition:
+        opacity 3s ease;
+
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: scale(1.04);
+
+    animation:
+        slowMove 18s
+        ease-in-out
+        forwards;
+}
+
+@keyframes slowMove {
+
+    0% {
+        transform:
+            scale(1.04)
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            scale(1.09)
+            translate3d(-0.8%, -0.4%, 0);
+    }
+
+    100% {
+        transform:
+            scale(1.13)
+            translate3d(-1.5%, -0.8%, 0);
+    }
+
+}
+
+/* =========================
+   OSCURIDAD
+   ========================= */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.25),
+            rgba(0,0,0,0.35)
+        );
+
+    pointer-events: none;
+}
+
+/* =========================
+   TEXTO
+   ========================= */
+
+.text {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(850px, 82%);
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 5;
+
+    color: #f8f6f1;
+
+    text-align: center;
+
+    font-size:
+        clamp(1.25rem, 2.6vw, 2rem);
+
+    font-weight: 300;
+
+    line-height: 1.65;
+
+    letter-spacing: 0.015em;
+
+    opacity: 0;
+
+    transition:
+        opacity 3s ease,
+        transform 3s ease;
+
+    text-shadow:
+        0 2px 15px rgba(0,0,0,0.85);
+}
+
+.text.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+/* Primera frase */
+
+.intro {
+    font-size:
+        clamp(1.6rem, 4vw, 3rem);
+
+    line-height: 1.35;
+
+    font-weight: 300;
+}
+
+/* Texto central */
+
+.venus-text {
+    font-size:
+        clamp(1.15rem, 2.3vw, 1.7rem);
+}
+
+/* Revelación */
+
+.final-text {
+    font-size:
+        clamp(1.35rem, 3vw, 2.1rem);
+
+    line-height: 1.55;
+}
+
+/* =========================
+   ESTRELLA DECORATIVA
+   ========================= */
+
+.star {
+    display: block;
+
+    margin-top: 25px;
+
+    font-size: 1.4em;
+
+    opacity: 0.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <!-- PRIMERA IMAGEN -->
+
+    <div
+        class="slide active"
+        id="slide1"
+    >
+        <img
+            src="7a95ffe8a20eb068f8e6dea17940e14c.jpg"
+            alt=""
+        >
+    </div>
+
+
+    <!-- SEGUNDA IMAGEN -->
+
+    <div
+        class="slide"
+        id="slide2"
+    >
+        <img
+            src="vtrans.jpg"
+            alt=""
+        >
+    </div>
+
+
+    <!-- TERCERA IMAGEN -->
+
+    <div
+        class="slide"
+        id="slide3"
+    >
+        <img
+            src="5f56d248c82c8f7e16d9265436a25e45.jpg"
+            alt=""
+        >
+    </div>
+
+
+    <!-- OSCURIDAD -->
+
+    <div class="overlay"></div>
+
+
+    <!-- TEXTO 1 -->
+
+    <div
+        class="text intro show"
+        id="text1"
+    >
+        A veces, el universo guarda coincidencias
+        que parecen demasiado perfectas para ser casualidad.
+    </div>
+
+
+    <!-- TEXTO 2 -->
+
+    <div
+        class="text venus-text"
+        id="text2"
+    >
+        ✦ Em 8 de junho de 2004, algo extraordinariamente
+        raro aconteceu: Vênus passou em frente ao Sol.
+        Esse trânsito planetário nos permite determinar
+        a distância entre a Terra e nossa estrela.
+    </div>
+
+
+    <!-- TEXTO 3 -->
+
+    <div
+        class="text final-text"
+        id="text3"
+    >
+        Naquele mesmo dia, nasceu a minha própria Vênus:
+        alguém que me ensinaria a medir a luz de uma maneira
+        diferente e que traria muito mais brilho ao meu mundo
+        do que eu jamais poderia ter imaginado.
+        
+        <span class="star">✦</span>
+    </div>
+
+</div>
+
+
+<script>
+
+const slides = [
+    document.getElementById("slide1"),
+    document.getElementById("slide2"),
+    document.getElementById("slide3")
+];
+
+const texts = [
+    document.getElementById("text1"),
+    document.getElementById("text2"),
+    document.getElementById("text3")
+];
+
+
+function showScene(index) {
+
+    slides.forEach((slide, i) => {
+
+        slide.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+
+
+    texts.forEach((text, i) => {
+
+        text.classList.toggle(
+            "show",
+            i === index
+        );
+
+    });
+
+}
+
+
+/*
+    Cada cena permanece
+    aproximadamente 8 segundos.
+
+    O movimento da imagem
+    continua acontecendo
+    durante a transição.
+*/
+
+
+setTimeout(() => {
+
+    showScene(1);
+
+}, 8000);
+
+
+setTimeout(() => {
+
+    showScene(2);
+
+}, 16000);
+
+</script>
+
+</body>
+  </html>
