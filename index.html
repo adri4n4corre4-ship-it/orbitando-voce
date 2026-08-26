@@ -18,47 +18,34 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    background: #050505;
+    color: #f8f6f1;
     font-family: "Cormorant Garamond", serif;
 }
 
-.scene {
+/* Cada sección */
+
+.section {
     position: relative;
-    width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     overflow: hidden;
-    background: #000;
 }
 
-/* =========================
-   IMÁGENES
-   ========================= */
+/* Imagen */
 
-.slide {
+.section img {
     position: absolute;
-    inset: 0;
 
-    opacity: 0;
-
-    transition:
-        opacity 3s ease;
-
-    z-index: 1;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-.slide img {
     width: 100%;
     height: 100%;
 
@@ -66,140 +53,158 @@ body {
 
     transform: scale(1.04);
 
-    animation:
-        slowMove 18s
-        ease-in-out
-        forwards;
+    transition:
+        transform 12s ease;
 }
 
-@keyframes slowMove {
+/* Movimiento muy lento al pasar */
 
-    0% {
-        transform:
-            scale(1.04)
-            translate3d(0, 0, 0);
-    }
-
-    50% {
-        transform:
-            scale(1.09)
-            translate3d(-0.8%, -0.4%, 0);
-    }
-
-    100% {
-        transform:
-            scale(1.13)
-            translate3d(-1.5%, -0.8%, 0);
-    }
-
+.section:hover img {
+    transform: scale(1.09);
 }
 
-/* =========================
-   OSCURIDAD
-   ========================= */
+/* Oscuridad sobre las imágenes */
 
 .overlay {
     position: absolute;
     inset: 0;
 
-    z-index: 3;
-
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.35)
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.45)
         );
 
-    pointer-events: none;
+    z-index: 1;
 }
 
-/* =========================
-   TEXTO
-   ========================= */
+/* Texto */
 
-.text {
-    position: absolute;
+.content {
+    position: relative;
 
-    left: 50%;
-    top: 50%;
+    z-index: 2;
 
-    width: min(850px, 82%);
-
-    transform:
-        translate(-50%, -50%);
-
-    z-index: 5;
-
-    color: #f8f6f1;
+    width: min(800px, 82%);
 
     text-align: center;
 
-    font-size:
-        clamp(1.25rem, 2.6vw, 2rem);
+    padding: 40px 20px;
 
-    font-weight: 300;
-
-    line-height: 1.65;
-
-    letter-spacing: 0.015em;
-
-    opacity: 0;
-
-    transition:
-        opacity 3s ease,
-        transform 3s ease;
-
-    text-shadow:
-        0 2px 15px rgba(0,0,0,0.85);
+    animation:
+        appear 2s ease both;
 }
 
-.text.show {
-    opacity: 1;
+@keyframes appear {
 
-    transform:
-        translate(-50%, -50%);
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
 
 /* Primera frase */
 
 .intro {
     font-size:
-        clamp(1.6rem, 4vw, 3rem);
+        clamp(1.8rem, 5vw, 3.3rem);
 
     line-height: 1.35;
 
     font-weight: 300;
+
+    letter-spacing: 0.02em;
+
+    text-shadow:
+        0 2px 20px rgba(0,0,0,0.9);
 }
 
-/* Texto central */
+/* Texto de Venus */
 
-.venus-text {
+.venus {
     font-size:
-        clamp(1.15rem, 2.3vw, 1.7rem);
+        clamp(1.2rem, 3vw, 1.8rem);
+
+    line-height: 1.7;
+
+    font-weight: 300;
 }
 
-/* Revelación */
+/* Texto final */
 
-.final-text {
+.final {
     font-size:
-        clamp(1.35rem, 3vw, 2.1rem);
+        clamp(1.45rem, 3.5vw, 2.3rem);
 
-    line-height: 1.55;
+    line-height: 1.6;
+
+    font-weight: 300;
 }
 
-/* =========================
-   ESTRELLA DECORATIVA
-   ========================= */
+/* Separadores */
 
 .star {
     display: block;
 
-    margin-top: 25px;
+    margin-top: 30px;
 
     font-size: 1.4em;
 
     opacity: 0.9;
+}
+
+
+/* Indicador de scroll */
+
+.scroll {
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 3;
+
+    font-size: 0.9rem;
+
+    letter-spacing: 0.2em;
+
+    opacity: 0.75;
+
+    animation:
+        float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, 0);
+    }
+
+    50% {
+        transform:
+            translate(-50%, 8px);
+    }
+
+}
+
+
+/* Espacio entre escenas */
+
+.section + .section {
+    border-top:
+        1px solid rgba(255,255,255,0.08);
 }
 
 </style>
@@ -207,156 +212,97 @@ body {
 
 <body>
 
-<div class="scene">
 
-    <!-- PRIMERA IMAGEN -->
+<!-- =========================
+     1. PRESENTACIÓN
+     ========================= -->
 
-    <div
-        class="slide active"
-        id="slide1"
+<section class="section">
+
+    <img
+        src="7a95ffe8a20eb068f8e6dea17940e14c.jpg"
+        alt=""
     >
-        <img
-            src="7a95ffe8a20eb068f8e6dea17940e14c.jpg"
-            alt=""
-        >
-    </div>
-
-
-    <!-- SEGUNDA IMAGEN -->
-
-    <div
-        class="slide"
-        id="slide2"
-    >
-        <img
-            src="vtrans.jpg"
-            alt=""
-        >
-    </div>
-
-
-    <!-- TERCERA IMAGEN -->
-
-    <div
-        class="slide"
-        id="slide3"
-    >
-        <img
-            src="5f56d248c82c8f7e16d9265436a25e45.jpg"
-            alt=""
-        >
-    </div>
-
-
-    <!-- OSCURIDAD -->
 
     <div class="overlay"></div>
 
+    <div class="content">
 
-    <!-- TEXTO 1 -->
+        <p class="intro">
+            A veces, el universo guarda coincidencias
+            que parecen demasiado perfectas para ser casualidad.
+        </p>
 
-    <div
-        class="text intro show"
-        id="text1"
-    >
-        A veces, el universo guarda coincidencias
-        que parecen demasiado perfectas para ser casualidad.
     </div>
 
-
-    <!-- TEXTO 2 -->
-
-    <div
-        class="text venus-text"
-        id="text2"
-    >
-        ✦ Em 8 de junho de 2004, algo extraordinariamente
-        raro aconteceu: Vênus passou em frente ao Sol.
-        Esse trânsito planetário nos permite determinar
-        a distância entre a Terra e nossa estrela.
+    <div class="scroll">
+        ↓
     </div>
 
+</section>
 
-    <!-- TEXTO 3 -->
 
-    <div
-        class="text final-text"
-        id="text3"
+<!-- =========================
+     2. VENUS
+     ========================= -->
+
+<section class="section">
+
+    <img
+        src="vtrans.jpg"
+        alt=""
     >
-        Naquele mesmo dia, nasceu a minha própria Vênus:
-        alguém que me ensinaria a medir a luz de uma maneira
-        diferente e que traria muito mais brilho ao meu mundo
-        do que eu jamais poderia ter imaginado.
-        
-        <span class="star">✦</span>
+
+    <div class="overlay"></div>
+
+    <div class="content">
+
+        <p class="venus">
+
+            ✦ Em 8 de junho de 2004, algo extraordinariamente
+            raro aconteceu: Vênus passou em frente ao Sol.
+            Esse trânsito planetário nos permite determinar
+            a distância entre a Terra e nossa estrela.
+
+        </p>
+
     </div>
 
-</div>
+</section>
 
 
-<script>
+<!-- =========================
+     3. REVELACIÓN
+     ========================= -->
 
-const slides = [
-    document.getElementById("slide1"),
-    document.getElementById("slide2"),
-    document.getElementById("slide3")
-];
+<section class="section">
 
-const texts = [
-    document.getElementById("text1"),
-    document.getElementById("text2"),
-    document.getElementById("text3")
-];
+    <img
+        src="5f56d248c82c8f7e16d9265436a25e45.jpg"
+        alt=""
+    >
 
+    <div class="overlay"></div>
 
-function showScene(index) {
+    <div class="content">
 
-    slides.forEach((slide, i) => {
+        <p class="final">
 
-        slide.classList.toggle(
-            "active",
-            i === index
-        );
+            Naquele mesmo dia, nasceu a minha própria Vênus:
+            alguém que me ensinaria a medir a luz de uma maneira
+            diferente e que traria muito mais brilho ao meu mundo
+            do que eu jamais poderia ter imaginado.
 
-    });
+            <span class="star">
+                ✦
+            </span>
 
+        </p>
 
-    texts.forEach((text, i) => {
+    </div>
 
-        text.classList.toggle(
-            "show",
-            i === index
-        );
+</section>
 
-    });
-
-}
-
-
-/*
-    Cada cena permanece
-    aproximadamente 8 segundos.
-
-    O movimento da imagem
-    continua acontecendo
-    durante a transição.
-*/
-
-
-setTimeout(() => {
-
-    showScene(1);
-
-}, 8000);
-
-
-setTimeout(() => {
-
-    showScene(2);
-
-}, 16000);
-
-</script>
 
 </body>
-  </html>
+</html>
