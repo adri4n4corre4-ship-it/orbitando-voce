@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,14 +10,21 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap"
+rel="stylesheet">
 
 <style>
 
+/* =========================
+   BASE
+   ========================= */
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
@@ -23,15 +32,23 @@ html {
 }
 
 body {
-    background: #050505;
-    color: #f8f6f1;
-    font-family: "Cormorant Garamond", serif;
+    background: #111;
+    color: #f4eee3;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
 }
 
-/* Cada sección */
 
-.section {
+/* =========================
+   POSTAL
+   ========================= */
+
+.postal {
     position: relative;
+
     min-height: 100vh;
 
     display: flex;
@@ -39,225 +56,274 @@ body {
     justify-content: center;
 
     overflow: hidden;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.12);
 }
 
-/* Imagen */
 
-.section img {
+/* =========================
+   IMAGEN
+   ========================= */
+
+.postal img {
     position: absolute;
+
+    inset: 0;
 
     width: 100%;
     height: 100%;
 
     object-fit: cover;
-
-    transform: scale(1.04);
-
-    transition:
-        transform 12s ease;
 }
 
-/* Movimiento muy lento al pasar */
 
-.section:hover img {
-    transform: scale(1.09);
-}
+/* =========================
+   EFECTO ANTIGUO
+   ========================= */
 
-/* Oscuridad sobre las imágenes */
+.postal::before {
+    content: "";
 
-.overlay {
     position: absolute;
+
     inset: 0;
+
+    z-index: 1;
 
     background:
         linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.15),
-            rgba(0,0,0,0.45)
+            rgba(35, 27, 20, 0.18),
+            rgba(20, 16, 12, 0.48)
         );
 
-    z-index: 1;
+    pointer-events: none;
 }
 
-/* Texto */
 
-.content {
-    position: relative;
+/* Textura muy suave */
+
+.postal::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
 
     z-index: 2;
 
-    width: min(800px, 82%);
+    opacity: 0.14;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   BORDE DE POSTAL
+   ========================= */
+
+.frame {
+    position: absolute;
+
+    inset: 22px;
+
+    z-index: 3;
+
+    border:
+        1px solid rgba(244,238,227,0.55);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   TEXTO
+   ========================= */
+
+.content {
+
+    position: relative;
+
+    z-index: 4;
+
+    width: min(850px, 82%);
 
     text-align: center;
 
-    padding: 40px 20px;
-
-    animation:
-        appear 2s ease both;
-}
-
-@keyframes appear {
-
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    padding: 50px 25px;
 
 }
 
-/* Primera frase */
 
-.intro {
+/* Texto principal */
+
+.text {
+
+    color: #f5efe5;
+
     font-size:
-        clamp(1.8rem, 5vw, 3.3rem);
+        clamp(1.8rem, 5vw, 3.2rem);
 
-    line-height: 1.35;
+    line-height: 1.38;
 
-    font-weight: 300;
+    font-weight: 500;
 
-    letter-spacing: 0.02em;
+    letter-spacing: 0.025em;
 
     text-shadow:
-        0 2px 20px rgba(0,0,0,0.9);
+        0 2px 14px rgba(0,0,0,0.85);
 }
+
 
 /* Texto de Venus */
 
 .venus {
+
     font-size:
-        clamp(1.2rem, 3vw, 1.8rem);
+        clamp(1.45rem, 4vw, 2.45rem);
 
-    line-height: 1.7;
+    line-height: 1.55;
 
-    font-weight: 300;
 }
+
 
 /* Texto final */
 
 .final {
+
     font-size:
-        clamp(1.45rem, 3.5vw, 2.3rem);
+        clamp(1.7rem, 4.5vw, 2.9rem);
 
-    line-height: 1.6;
+    line-height: 1.48;
 
-    font-weight: 300;
-}
-
-/* Separadores */
-
-.star {
-    display: block;
-
-    margin-top: 30px;
-
-    font-size: 1.4em;
-
-    opacity: 0.9;
 }
 
 
-/* Indicador de scroll */
+/* =========================
+   INDICADOR
+   ========================= */
 
 .scroll {
+
     position: absolute;
 
-    bottom: 30px;
+    bottom: 38px;
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    z-index: 3;
+    z-index: 5;
 
-    font-size: 0.9rem;
+    color: #eee7db;
 
-    letter-spacing: 0.2em;
+    text-align: center;
 
-    opacity: 0.75;
+    font-size: 1rem;
 
-    animation:
-        float 2s ease-in-out infinite;
-}
+    letter-spacing: 0.12em;
 
-@keyframes float {
-
-    0%,
-    100% {
-        transform:
-            translate(-50%, 0);
-    }
-
-    50% {
-        transform:
-            translate(-50%, 8px);
-    }
+    opacity: 0.9;
 
 }
 
 
-/* Espacio entre escenas */
+.scroll span {
 
-.section + .section {
-    border-top:
-        1px solid rgba(255,255,255,0.08);
+    display: block;
+
+    font-size: 1.7rem;
+
+    margin-bottom: 3px;
+
+}
+
+
+/* =========================
+   MÓVIL
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .frame {
+        inset: 14px;
+    }
+
+    .content {
+        width: 88%;
+        padding: 35px 15px;
+    }
+
+    .scroll {
+        bottom: 25px;
+        font-size: 0.9rem;
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 
 <!-- =========================
-     1. PRESENTACIÓN
+     POSTAL 1
      ========================= -->
 
-<section class="section">
+<section class="postal">
 
     <img
         src="7a95ffe8a20eb068f8e6dea17940e14c.jpg"
         alt=""
     >
 
-    <div class="overlay"></div>
+    <div class="frame"></div>
 
     <div class="content">
 
-        <p class="intro">
+        <p class="text">
+
             A veces, el universo guarda coincidencias
             que parecen demasiado perfectas para ser casualidad.
+
         </p>
 
     </div>
 
     <div class="scroll">
-        ↓
+
+        <span>↓</span>
+        desliza para continuar
+
     </div>
 
 </section>
 
 
+
 <!-- =========================
-     2. VENUS
+     POSTAL 2
      ========================= -->
 
-<section class="section">
+<section class="postal">
 
     <img
         src="vtrans.jpg"
         alt=""
     >
 
-    <div class="overlay"></div>
+    <div class="frame"></div>
 
     <div class="content">
 
-        <p class="venus">
+        <p class="text venus">
 
             ✦ Em 8 de junho de 2004, algo extraordinariamente
             raro aconteceu: Vênus passou em frente ao Sol.
@@ -268,34 +334,42 @@ body {
 
     </div>
 
+    <div class="scroll">
+
+        <span>↓</span>
+        desliza para continuar
+
+    </div>
+
 </section>
 
 
+
 <!-- =========================
-     3. REVELACIÓN
+     POSTAL 3
      ========================= -->
 
-<section class="section">
+<section class="postal">
 
     <img
         src="5f56d248c82c8f7e16d9265436a25e45.jpg"
         alt=""
     >
 
-    <div class="overlay"></div>
+    <div class="frame"></div>
 
     <div class="content">
 
-        <p class="final">
+        <p class="text final">
 
             Naquele mesmo dia, nasceu a minha própria Vênus:
             alguém que me ensinaria a medir a luz de uma maneira
             diferente e que traria muito mais brilho ao meu mundo
             do que eu jamais poderia ter imaginado.
 
-            <span class="star">
-                ✦
-            </span>
+            <br><br>
+
+            ✦
 
         </p>
 
@@ -305,4 +379,5 @@ body {
 
 
 </body>
-</html>
+
+    </html>
