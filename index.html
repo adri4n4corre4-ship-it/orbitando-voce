@@ -17,10 +17,6 @@ rel="stylesheet">
 
 <style>
 
-/* =========================
-   BASE
-   ========================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -33,12 +29,8 @@ html {
 
 body {
     background: #111;
-    color: #f4eee3;
-
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
+    color: #F4EFE5;
+    font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 
@@ -58,7 +50,7 @@ body {
     overflow: hidden;
 
     border-bottom:
-        1px solid rgba(255,255,255,0.12);
+        1px solid rgba(244,239,229,0.12);
 }
 
 
@@ -79,7 +71,7 @@ body {
 
 
 /* =========================
-   EFECTO ANTIGUO
+   OSCURIDAD
    ========================= */
 
 .postal::before {
@@ -93,15 +85,17 @@ body {
 
     background:
         linear-gradient(
-            rgba(35, 27, 20, 0.18),
-            rgba(20, 16, 12, 0.48)
+            rgba(20,16,12,0.18),
+            rgba(15,12,9,0.48)
         );
 
     pointer-events: none;
 }
 
 
-/* Textura muy suave */
+/* =========================
+   TEXTURA ANTIGUA
+   ========================= */
 
 .postal::after {
     content: "";
@@ -122,7 +116,7 @@ body {
 
 
 /* =========================
-   BORDE DE POSTAL
+   BORDE
    ========================= */
 
 .frame {
@@ -133,14 +127,14 @@ body {
     z-index: 3;
 
     border:
-        1px solid rgba(244,238,227,0.55);
+        1px solid rgba(244,239,229,0.55);
 
     pointer-events: none;
 }
 
 
 /* =========================
-   TEXTO
+   CONTENIDO
    ========================= */
 
 .content {
@@ -158,11 +152,13 @@ body {
 }
 
 
-/* Texto principal */
+/* =========================
+   LETRA
+   ========================= */
 
 .text {
 
-    color: #f5efe5;
+    color: #F4EFE5;
 
     font-size:
         clamp(1.8rem, 5vw, 3.2rem);
@@ -203,14 +199,12 @@ body {
 
 
 /* =========================
-   INDICADOR
+   INDICADORES
    ========================= */
 
 .scroll {
 
     position: absolute;
-
-    bottom: 38px;
 
     left: 50%;
 
@@ -219,7 +213,7 @@ body {
 
     z-index: 5;
 
-    color: #eee7db;
+    color: #F4EFE5;
 
     text-align: center;
 
@@ -229,6 +223,16 @@ body {
 
     opacity: 0.9;
 
+}
+
+
+.scroll-top {
+    top: 30px;
+}
+
+
+.scroll-bottom {
+    bottom: 30px;
 }
 
 
@@ -259,7 +263,6 @@ body {
     }
 
     .scroll {
-        bottom: 25px;
         font-size: 0.9rem;
     }
 
@@ -274,7 +277,7 @@ body {
 
 
 <!-- =========================
-     POSTAL 1
+     PRIMERA POSTAL
      ========================= -->
 
 <section class="postal">
@@ -286,21 +289,28 @@ body {
 
     <div class="frame"></div>
 
+    <div class="scroll scroll-top">
+
+        <span>↑</span>
+        Deslize para baixo
+
+    </div>
+
     <div class="content">
 
         <p class="text">
 
-            A veces, el universo guarda coincidencias
-            que parecen demasiado perfectas para ser casualidad.
+            Às vezes, o universo reserva coincidências
+            que parecem perfeitas demais para serem mera coincidência.
 
         </p>
 
     </div>
 
-    <div class="scroll">
+    <div class="scroll scroll-bottom">
 
         <span>↓</span>
-        desliza para continuar
+        Deslize
 
     </div>
 
@@ -309,7 +319,7 @@ body {
 
 
 <!-- =========================
-     POSTAL 2
+     SEGUNDA POSTAL
      ========================= -->
 
 <section class="postal">
@@ -325,7 +335,7 @@ body {
 
         <p class="text venus">
 
-            ✦ Em 8 de junho de 2004, algo extraordinariamente
+            Em 8 de junho de 2004, algo extraordinariamente
             raro aconteceu: Vênus passou em frente ao Sol.
             Esse trânsito planetário nos permite determinar
             a distância entre a Terra e nossa estrela.
@@ -334,10 +344,10 @@ body {
 
     </div>
 
-    <div class="scroll">
+    <div class="scroll scroll-bottom">
 
         <span>↓</span>
-        desliza para continuar
+        Deslize mais uma vez
 
     </div>
 
@@ -346,7 +356,7 @@ body {
 
 
 <!-- =========================
-     POSTAL 3
+     TERCEIRA POSTAL
      ========================= -->
 
 <section class="postal">
@@ -362,14 +372,10 @@ body {
 
         <p class="text final">
 
-            Naquele mesmo dia, nasceu a minha própria Vênus:
+            Naquele mesmo dia nasceu a minha própria Vênus:
             alguém que me ensinaria a medir a luz de uma maneira
             diferente e que traria muito mais brilho ao meu mundo
-            do que eu jamais poderia ter imaginado.
-
-            <br><br>
-
-            ✦
+            do que eu jamais poderia ter imaginado. ✦
 
         </p>
 
@@ -380,4 +386,4 @@ body {
 
 </body>
 
-    </html>
+</html>
