@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Orbitando Você</title>
 
   <style>
@@ -14,37 +12,230 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
-    }
-
-    body {
       overflow: hidden;
       background: #000;
     }
 
-    .sky {
+    .scene {
+      position: relative;
       width: 100%;
       height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
 
-      background-image:
-        linear-gradient(
-          rgba(0, 0, 0, 0.38),
-          rgba(0, 0, 0, 0.38)
-        ),
-        url("milky-way_fitzsimmons.jpg");
-
+    /* Cielo nocturno */
+    .night-sky {
+      position: absolute;
+      inset: -5%;
+      background-image: url("milky-way_fitzsimmons.jpg");
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
+      animation: skyMovement 25s ease-in-out infinite alternate;
+      transition: opacity 6s ease;
+    }
+
+    /* Oscurece ligeramente el cielo */
+    .darkness {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.22);
+      z-index: 2;
+      transition: opacity 7s ease;
+    }
+
+    /* Sol */
+    .sun {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transform: scale(1.08);
+      z-index: 3;
+      transition:
+        opacity 8s ease,
+        transform 10s ease;
+    }
+
+    /* Capa suave para integrar el Sol con el cielo */
+    .sun-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255, 210, 100, 0.12),
+          rgba(255, 180, 60, 0.04) 35%,
+          transparent 70%
+        );
+      opacity: 0;
+      transition: opacity 8s ease;
+      pointer-events: none;
+    }
+
+    /* Fecha */
+    .date {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
+      letter-spacing: 0.35em;
+      text-align: center;
+
+      opacity: 0;
+      transition: opacity 4s ease;
+      white-space: nowrap;
+
+      text-shadow:
+        0 0 15px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Texto */
+    .message {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(850px, 82%);
+      transform: translate(-50%, -50%);
+      z-index: 7;
+
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.8;
+      text-align: center;
+
+      opacity: 0;
+      transition: opacity 5s ease;
+
+      text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.9),
+        0 0 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .message .star {
+      display: block;
+      margin-top: 25px;
+      font-size: 1.4rem;
+    }
+
+    /* Movimiento muy lento del cielo */
+    @keyframes skyMovement {
+      from {
+        transform: scale(1.02) translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: scale(1.08) translate3d(-1%, -1%, 0);
+      }
+    }
+
+    /* Cuando llega el amanecer */
+    .scene.day .night-sky {
+      opacity: 0.15;
+    }
+
+    .scene.day .darkness {
+      opacity: 0;
+    }
+
+    .scene.day .sun {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .scene.day .sun-glow {
+      opacity: 1;
+    }
+
+    .scene.show-date .date {
+      opacity: 1;
+    }
+
+    .scene.show-message .date {
+      opacity: 0;
+    }
+
+    .scene.show-message .message {
+      opacity: 1;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="sky"></div>
+  <div class="scene" id="scene">
+
+    <div class="night-sky"></div>
+
+    <div class="darkness"></div>
+
+    <img
+      class="sun"
+      src="654038main_Venustransit_2004_full.jpg"
+      alt="Trânsito de Vênus de 2004"
+    >
+
+    <div class="sun-glow"></div>
+
+    <div class="date">
+      08 · 06 · 2004
+    </div>
+
+    <div class="message">
+      Em 8 de junho de 2004, aconteceu algo extraordinariamente raro:
+      Vênus passou diante do Sol. Ao fazer isso, esse planeta nos permite
+      conhecer a distância que existe entre a nossa Terra e a nossa estrela.
+
+      <br><br>
+
+      Nesse mesmo dia, nasceu o meu próprio Vênus: alguém que me ensinaria
+      a medir a luz de outra maneira e que traria ao meu mundo muito mais
+      brilho do que eu jamais poderia imaginar.
+
+      <span class="star">✦</span>
+    </div>
+
+  </div>
+
+  <script>
+    const scene = document.getElementById("scene");
+
+    /*
+      A sequência acontece automaticamente:
+      
+      0s    → céu noturno
+      10s   → começa a transição para o Sol
+      18s   → aparece a data
+      25s   → aparece a frase
+    */
+
+    setTimeout(() => {
+      scene.classList.add("day");
+    }, 10000);
+
+    setTimeout(() => {
+      scene.classList.add("show-date");
+    }, 18000);
+
+    setTimeout(() => {
+      scene.classList.add("show-message");
+    }, 25000);
+  </script>
 
 </body>
-</html>
+  </html>
