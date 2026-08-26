@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap"
+href="https://fonts.googleapis.com/css2?family=Italianno&display=swap"
 rel="stylesheet">
 
 <style>
@@ -28,19 +28,16 @@ html {
 }
 
 body {
-    background: #111;
+    background: #000;
     color: #F4EFE5;
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Italianno", cursive;
 }
 
 
-/* =========================
-   POSTAL
-   ========================= */
+/* POSTALES */
 
 .postal {
     position: relative;
-
     min-height: 100vh;
 
     display: flex;
@@ -49,14 +46,14 @@ body {
 
     overflow: hidden;
 
+    background: #000;
+
     border-bottom:
         1px solid rgba(244,239,229,0.12);
 }
 
 
-/* =========================
-   IMAGEN
-   ========================= */
+/* IMAGEN COMPLETA */
 
 .postal img {
     position: absolute;
@@ -66,13 +63,13 @@ body {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+
+    background: #000;
 }
 
 
-/* =========================
-   OSCURIDAD
-   ========================= */
+/* OSCURIDAD SUAVE */
 
 .postal::before {
     content: "";
@@ -85,17 +82,15 @@ body {
 
     background:
         linear-gradient(
-            rgba(20,16,12,0.18),
-            rgba(15,12,9,0.48)
+            rgba(15,12,9,0.08),
+            rgba(15,12,9,0.28)
         );
 
     pointer-events: none;
 }
 
 
-/* =========================
-   TEXTURA ANTIGUA
-   ========================= */
+/* TEXTURA ANTIGUA */
 
 .postal::after {
     content: "";
@@ -106,7 +101,7 @@ body {
 
     z-index: 2;
 
-    opacity: 0.14;
+    opacity: 0.10;
 
     background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
@@ -115,9 +110,7 @@ body {
 }
 
 
-/* =========================
-   BORDE
-   ========================= */
+/* BORDE */
 
 .frame {
     position: absolute;
@@ -133,77 +126,62 @@ body {
 }
 
 
-/* =========================
-   CONTENIDO
-   ========================= */
+/* TEXTO */
 
 .content {
-
     position: relative;
 
     z-index: 4;
 
-    width: min(850px, 82%);
+    width: min(900px, 86%);
 
     text-align: center;
 
     padding: 50px 25px;
-
 }
 
 
-/* =========================
-   LETRA
-   ========================= */
-
 .text {
-
     color: #F4EFE5;
 
     font-size:
-        clamp(1.8rem, 5vw, 3.2rem);
+        clamp(2.2rem, 6vw, 4rem);
 
-    line-height: 1.38;
+    line-height: 1.25;
 
-    font-weight: 500;
+    font-weight: 400;
 
-    letter-spacing: 0.025em;
+    letter-spacing: 0.015em;
 
     text-shadow:
-        0 2px 14px rgba(0,0,0,0.85);
+        0 2px 5px rgba(0,0,0,0.75),
+        0 4px 12px rgba(0,0,0,0.35);
 }
 
 
-/* Texto de Venus */
+/* SEGUNDO TEXTO */
 
 .venus {
-
     font-size:
-        clamp(1.45rem, 4vw, 2.45rem);
+        clamp(2rem, 5.2vw, 3.5rem);
 
-    line-height: 1.55;
-
+    line-height: 1.3;
 }
 
 
-/* Texto final */
+/* TERCER TEXTO */
 
 .final {
-
     font-size:
-        clamp(1.7rem, 4.5vw, 2.9rem);
+        clamp(2.1rem, 5.5vw, 3.7rem);
 
-    line-height: 1.48;
-
+    line-height: 1.28;
 }
 
 
-/* =========================
-   INDICADORES
-   ========================= */
+/* INDICADORES */
 
 .scroll {
-
     position: absolute;
 
     left: 50%;
@@ -217,39 +195,41 @@ body {
 
     text-align: center;
 
-    font-size: 1rem;
+    font-size: 1.55rem;
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.04em;
 
-    opacity: 0.9;
+    line-height: 1;
 
+    text-shadow:
+        0 2px 5px rgba(0,0,0,0.7);
 }
 
+
+.scroll span {
+    display: block;
+
+    font-size: 2rem;
+
+    margin-bottom: 5px;
+}
+
+
+/* ARRIBA DE LA PRIMERA */
 
 .scroll-top {
     top: 30px;
 }
 
 
+/* ABAJO */
+
 .scroll-bottom {
     bottom: 30px;
 }
 
 
-.scroll span {
-
-    display: block;
-
-    font-size: 1.7rem;
-
-    margin-bottom: 3px;
-
-}
-
-
-/* =========================
-   MÓVIL
-   ========================= */
+/* MÓVIL */
 
 @media (max-width: 600px) {
 
@@ -258,12 +238,24 @@ body {
     }
 
     .content {
-        width: 88%;
-        padding: 35px 15px;
+        width: 90%;
+        padding: 35px 12px;
+    }
+
+    .text {
+        font-size: 2.15rem;
+    }
+
+    .venus {
+        font-size: 1.95rem;
+    }
+
+    .final {
+        font-size: 2.05rem;
     }
 
     .scroll {
-        font-size: 0.9rem;
+        font-size: 1.3rem;
     }
 
 }
@@ -276,9 +268,7 @@ body {
 <body>
 
 
-<!-- =========================
-     PRIMERA POSTAL
-     ========================= -->
+<!-- PRIMERA POSTAL -->
 
 <section class="postal">
 
@@ -289,12 +279,16 @@ body {
 
     <div class="frame"></div>
 
+
+    <!-- FLECHA HACIA ABAJO -->
+
     <div class="scroll scroll-top">
 
-        <span>↑</span>
+        <span>↓</span>
         Deslize para baixo
 
     </div>
+
 
     <div class="content">
 
@@ -307,6 +301,7 @@ body {
 
     </div>
 
+
     <div class="scroll scroll-bottom">
 
         <span>↓</span>
@@ -318,18 +313,17 @@ body {
 
 
 
-<!-- =========================
-     SEGUNDA POSTAL
-     ========================= -->
+<!-- SEGUNDA POSTAL -->
 
 <section class="postal">
 
     <img
-        src="vtrans.jpg"
+        src="5f56d248c82c8f7e16d9265436a25e45.jpg"
         alt=""
     >
 
     <div class="frame"></div>
+
 
     <div class="content">
 
@@ -344,6 +338,7 @@ body {
 
     </div>
 
+
     <div class="scroll scroll-bottom">
 
         <span>↓</span>
@@ -355,18 +350,17 @@ body {
 
 
 
-<!-- =========================
-     TERCEIRA POSTAL
-     ========================= -->
+<!-- TERCEIRA POSTAL -->
 
 <section class="postal">
 
     <img
-        src="5f56d248c82c8f7e16d9265436a25e45.jpg"
+        src="20260826_035237.jpg"
         alt=""
     >
 
     <div class="frame"></div>
+
 
     <div class="content">
 
@@ -386,4 +380,4 @@ body {
 
 </body>
 
-</html>
+    </html>
