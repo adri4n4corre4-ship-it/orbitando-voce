@@ -12,8 +12,7 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -32,14 +31,12 @@
     .night-sky {
       position: absolute;
       inset: -5%;
-      background-image: url( "luca-calderone-xp7IByu7OvA-unsplash.jpg");
+      background-image: url("luca-calderone-xp7IByu7OvA-unsplash.jpg");
       background-size: cover;
       background-position: center;
-      animation: skyMovement 25s ease-in-out infinite alternate;
-      transition: opacity 6s ease;
+      animation: skyMovement 35s ease-in-out infinite alternate;
     }
 
-    /* Oscurece ligeramente el cielo */
     .darkness {
       position: absolute;
       inset: 0;
@@ -48,7 +45,7 @@
       transition: opacity 7s ease;
     }
 
-    /* Sol */
+    /* Sol + Venus */
     .sun {
       position: absolute;
       inset: 0;
@@ -64,7 +61,6 @@
         transform 10s ease;
     }
 
-    /* Capa suave para integrar el Sol con el cielo */
     .sun-glow {
       position: absolute;
       inset: 0;
@@ -94,17 +90,17 @@
       font-size: clamp(1.5rem, 4vw, 2.8rem);
       letter-spacing: 0.35em;
       text-align: center;
+      white-space: nowrap;
 
       opacity: 0;
       transition: opacity 4s ease;
-      white-space: nowrap;
 
       text-shadow:
         0 0 15px rgba(0, 0, 0, 0.8),
         0 0 30px rgba(0, 0, 0, 0.6);
     }
 
-    /* Texto */
+    /* Frase */
     .message {
       position: absolute;
       left: 50%;
@@ -133,7 +129,7 @@
       font-size: 1.4rem;
     }
 
-    /* Movimiento muy lento del cielo */
+    /* Movimiento lento del cielo */
     @keyframes skyMovement {
       from {
         transform: scale(1.02) translate3d(0, 0, 0);
@@ -144,7 +140,6 @@
       }
     }
 
-    /* Cuando llega el amanecer */
     .scene.day .night-sky {
       opacity: 0.15;
     }
@@ -215,15 +210,6 @@
   <script>
     const scene = document.getElementById("scene");
 
-    /*
-      A sequência acontece automaticamente:
-      
-      0s    → céu noturno
-      10s   → começa a transição para o Sol
-      18s   → aparece a data
-      25s   → aparece a frase
-    */
-
     setTimeout(() => {
       scene.classList.add("day");
     }, 10000);
@@ -238,4 +224,4 @@
   </script>
 
 </body>
-  </html>
+</html>
